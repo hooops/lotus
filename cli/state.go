@@ -1720,21 +1720,16 @@ var stateCircSupplyCmd = &cli.Command{
 }
 var stateCircSupplyhighlyCmd = &cli.Command{
 	Name:  "circulating-supply-high",
-	Usage: "Get the exact current circulating supply of Filecoin",
-	ArgsUsage: "[blockCid]",
+	Usage: "Get the exact current circulating supply of Filecoin by high",
 	Flags: []cli.Flag{
-		&cli.BoolFlag{
-			Name:  "vm-supply",
-			Usage: "calculates the approximation of the circulating supply used internally by the VM (instead of the exact amount) by highly",
-			Value: false,
-		},
-		&cli.BoolFlag{
-			Name:  "raw",
-			Usage: "print just the raw block header",
+		&cli.IntFlag{
+			Name:  "high",
+			Usage: "calculates the approximation of the circulating supply used internally by the VM (instead of the exact amount)",
+			Value: 0,
 		},
 	},
 	Action: func(cctx *cli.Context) error {
-		api, closer, err := GetFullNodeAPIByHigh(cctx)
+		api, closer, err := GetFullNodeAPI(cctx)
 		if err != nil {
 			return err
 		}
@@ -1747,8 +1742,15 @@ var stateCircSupplyhighlyCmd = &cli.Command{
 			return err
 		}
 
-		if cctx.IsSet("vm-supply") {
-			circ, err := api.StateVMCirculatingSupplyInternal(ctx, ts.Key())
+		if cctx.IsSet("high") {
+
+			next, err := api.ChainGetTipSetByHeight(ctx, cctx.Int("high"), ts.Key())
+			if err != nil {
+				return err
+			}
+
+
+			circ, err := api.StateVMCirculatingSupplyInternal(ctx, next)
 			if err != nil {
 				return err
 			}
