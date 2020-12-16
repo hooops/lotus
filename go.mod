@@ -3,7 +3,6 @@ module github.com/filecoin-project/lotus
 go 1.15
 
 require (
-	github.com/urfave/cli v1.22.2-0.20191024042601-850de854cda0
 	contrib.go.opencensus.io/exporter/jaeger v0.1.0
 	contrib.go.opencensus.io/exporter/prometheus v0.1.0
 	github.com/BurntSushi/toml v0.3.1
@@ -53,7 +52,6 @@ require (
 	github.com/google/uuid v1.1.2
 	github.com/gorilla/mux v1.7.4
 	github.com/gorilla/websocket v1.4.2
-	github.com/gpmgo/gopm/modules/cli v0.0.0-00010101000000-000000000000
 	github.com/hako/durafmt v0.0.0-20200710122514-c0fb7b4da026
 	github.com/hannahhoward/go-pubsub v0.0.0-20200423002714-8d62886cc36e
 	github.com/hashicorp/go-multierror v1.1.0
@@ -159,7 +157,5 @@ replace github.com/golangci/golangci-lint => github.com/golangci/golangci-lint v
 replace github.com/filecoin-project/filecoin-ffi => ./extern/filecoin-ffi
 
 replace github.com/filecoin-project/test-vectors => ./extern/test-vectors
-
-replace github.com/gpmgo/gopm/modules/cli => ./extern/cli
 
 replace github.com/supranational/blst => ./extern/blst
